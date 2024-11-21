@@ -8,7 +8,9 @@ const backgrounds = {
   fire: '#FFA07A',    // Soft red (Light Salmon)
   bug: '#FFFFE0',     // Soft yellow (Light Yellow)
   poison: '#DDA0DD',  // Soft purple (Plum)
-  grass: '#98FB98'    // Soft green (Pale Green)
+  grass: '#98FB98' ,   // Soft green (Pale Green)
+  water: '#AFEEEE'    // Soft green (Pale Green)
+
 };
 
 function App() {
@@ -40,45 +42,49 @@ function App() {
   }, []);
   return (
     <div className="App">
-
-    <div style={{display:'flex', justifyContent: 'center', padding:'5%'}}>
-
-  
-
-      {
-        pokedexs.map((item, index)=>(
-          <div class="card" style={{ backgroundColor:backgrounds[item.types[0].type.name]}}>
-
-          <h3>{item.name}</h3>
-          <img src={item.sprites.front_default}/>
-          {/* {
-            item.abilities.map((ability)=>(
-              <button class="rounded-button">
-                {ability.ability.name.toString().replaceAll('-', ' ') }
-              </button>
-
-            ))
-          } */}
-
-
-{
-            item.types.map((type)=>(
-              <button class="rounded-button" style={{marginBottom:'5%'}}>
-                {type.type.name.toString().replaceAll('-', ' ') }
-              </button>
-
-            ))
-          }
-          
+      {/* Main container for centering */}
+      <div style={{ display: 'flex', justifyContent: 'center', padding: '5%' }}>
+        {/* Inner container for wrapping */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'center' }}>
+          {pokedexs.map((item, index) => (
+            <div
+              key={index}
+              className="card"
+              style={{
+                backgroundColor: backgrounds[item.types[0].type.name],
+                padding: '10px',
+                borderRadius: '10px',
+                textAlign: 'center',
+                width: '150px', // You can adjust the width for responsiveness
+              }}
+            >
+              <h3>{item.name}</h3>
+              <img src={item.sprites.front_default} alt={item.name} style={{ width: '100%' }} />
+              
+              {/* Type buttons */}
+              {item.types.map((type, typeIndex) => (
+                <button
+                  key={typeIndex}
+                  className="rounded-button"
+                  style={{
+                    marginBottom: '5%',
+                    padding: '5px 10px',
+                    border: 'none',
+                    borderRadius: '5px',
+                    backgroundColor: '#eee',
+                    cursor: 'pointer',
+                  }}
+                >
+                  {type.type.name.toString().replaceAll('-', ' ')}
+                </button>
+              ))}
+            </div>
+          ))}
         </div>
-        ))
-      }
-
-    </div>
-
-
+      </div>
     </div>
   );
+  
 }
 
 export default App;
